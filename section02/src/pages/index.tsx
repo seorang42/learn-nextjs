@@ -1,5 +1,7 @@
 // CSS Module
+import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
+import { ReactNode } from "react";
 
 export default function Home() {
   return (
@@ -9,3 +11,8 @@ export default function Home() {
     </>
   );
 }
+
+// getLayout 메서드 정의
+Home.getLayout = (page: ReactNode) => {
+  return <SearchableLayout>{page}</SearchableLayout>;
+};
