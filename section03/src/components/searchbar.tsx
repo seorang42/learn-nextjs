@@ -1,18 +1,26 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Searchbar() {
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/search?q=${search}`);
+  };
+
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <input value={search} onChange={onChangeSearch} />
-      <button>검색</button>
-    </div>
+      <button type="submit">검색</button>
+    </form>
   );
 }
