@@ -1,12 +1,11 @@
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
-import books from "@/mock/books.json";
 import { BookData } from "@/types";
 
 async function AllBooks() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-    { cache: "no-cache" }
+    { cache: "force-cache" }
   );
   if (!response.ok) {
     return <div>오류가 발생했습니다...</div>;
@@ -31,6 +30,7 @@ async function RecoBooks() {
     return <div>오류가 발생했습니다...</div>;
   }
   const recoBooks: BookData[] = await response.json();
+
   return (
     <div>
       {recoBooks.map((book) => (
@@ -40,7 +40,7 @@ async function RecoBooks() {
   );
 }
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className={style.container}>
       <section>
