@@ -15,15 +15,21 @@ export default function Modal({ children }: { children: ReactNode }) {
       dialogRef.current?.scrollTo({
         top: 0,
       });
+
+      document.body.style.overflow = "hidden";
     }
   }, []);
 
   return createPortal(
     <dialog
-      onClose={() => router.back()}
+      onClose={() => {
+        document.body.style.overflow = "auto";
+        router.back();
+      }}
       onClick={(e) => {
         // modal의 배경을 클릭할 경우 뒤로가기
         if ((e.target as any).nodeName === "DIALOG") {
+          document.body.style.overflow = "auto";
           router.back();
         }
       }}
